@@ -221,7 +221,7 @@ public class ParallaxHeader: NSObject {
         let binding = [
             "v" : view
         ]
-        
+
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "H:|[v]|",
@@ -232,7 +232,7 @@ public class ParallaxHeader: NSObject {
         )
         contentView.addConstraints(
             NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|[v]|",
+                withVisualFormat: "V:|-[v]-100-|",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: binding
@@ -435,10 +435,11 @@ public class ParallaxHeader: NSObject {
         guard let scrollView = scrollView else {
             return
         }
+        let navigationBarHeight: CGFloat = 64
         let minimumHeight = min(self.minimumHeight, self.height)
-        let relativeYOffset = scrollView.contentOffset.y + scrollView.contentInset.top - height
+        let relativeYOffset = scrollView.contentOffset.y + scrollView.contentInset.top - height - navigationBarHeight
         let relativeHeight = -relativeYOffset
-        
+
         let frame = CGRect(
             x: 0,
             y: relativeYOffset,
@@ -448,7 +449,7 @@ public class ParallaxHeader: NSObject {
         contentView.frame = frame
         
         let div = self.height - self.minimumHeight
-        progress = (self.contentView.frame.size.height - self.minimumHeight) / div
+        progress = ((self.contentView.frame.size.height - navigationBarHeight) - self.minimumHeight) / div
     }
     
     private func adjustScrollViewTopInset(top: CGFloat) {
@@ -461,7 +462,7 @@ public class ParallaxHeader: NSObject {
         var offset = scrollView.contentOffset
         offset.y += inset.top - top
         scrollView.contentOffset = offset
-        
+
         //Adjust content inset
         inset.top = top
         scrollView.contentInset = inset

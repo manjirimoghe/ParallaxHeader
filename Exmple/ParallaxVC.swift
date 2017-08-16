@@ -17,7 +17,9 @@ class ParallaxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        navigationController?.navigationBar.setClear()
+
         setupParallaxHeader()
     }
     
@@ -33,7 +35,7 @@ class ParallaxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.parallaxHeader.view = imageView
         tableView.parallaxHeader.height = 400
-        tableView.parallaxHeader.minimumHeight = 0
+        tableView.parallaxHeader.minimumHeight = 64
         tableView.parallaxHeader.mode = .topFill
         tableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             print(parallaxHeader.progress)
@@ -57,3 +59,13 @@ class ParallaxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 }
 
 
+
+extension UINavigationBar {
+    func setClear() {
+        isTranslucent = true
+        shadowImage = UIImage()
+        tintColor = UIColor.white
+        barTintColor = UIColor.clear
+        setBackgroundImage(UIImage(), for: .default)
+    }
+}
