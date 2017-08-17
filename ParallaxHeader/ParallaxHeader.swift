@@ -191,6 +191,12 @@ public class ParallaxHeader: NSObject {
             parallaxHeaderDidScrollHandler?(self)
         }
     }
+
+    public var translucentNavigationBar: Bool = false {
+        didSet {
+            layoutContentView()
+        }
+    }
     
     
     //MARK: constraints
@@ -439,7 +445,7 @@ public class ParallaxHeader: NSObject {
         guard let scrollView = scrollView else {
             return
         }
-        let navigationBarHeight: CGFloat = 64
+        let navigationBarHeight: CGFloat = translucentNavigationBar ? 64 : 0
         let minimumHeight = min(self.minimumHeight, self.height)
         let relativeYOffset = scrollView.contentOffset.y + scrollView.contentInset.top - height - navigationBarHeight
         let relativeHeight = -relativeYOffset
