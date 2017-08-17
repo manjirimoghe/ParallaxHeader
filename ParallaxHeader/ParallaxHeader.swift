@@ -12,7 +12,7 @@ import ObjectiveC.runtime
 
 public typealias ParallaxHeaderHandlerBlock = (_ parallaxHeader: ParallaxHeader)->Void
 
-protocol ParallaxHeaderUpdateProtocol: class {
+public protocol ParallaxHeaderUpdateProtocol: class {
     func didUpdatePercentage() -> ParallaxHeaderHandlerBlock
 }
 
