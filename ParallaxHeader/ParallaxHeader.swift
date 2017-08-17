@@ -12,6 +12,10 @@ import ObjectiveC.runtime
 
 public typealias ParallaxHeaderHandlerBlock = (_ parallaxHeader: ParallaxHeader)->Void
 
+protocol ParallaxHeaderUpdateProtocol: class {
+    func didUpdatePercentage() -> ParallaxHeaderHandlerBlock
+}
+
 
 private let parallaxHeaderKVOContext = UnsafeMutableRawPointer.allocate(
     bytes: 4,
