@@ -192,7 +192,7 @@ public class ParallaxHeader: NSObject {
         }
     }
 
-    public var translucentNavigationBar: Bool = false {
+    public var navigationBarOffset: CGFont = 0.0 {
         didSet {
             layoutContentView()
         }
@@ -445,9 +445,8 @@ public class ParallaxHeader: NSObject {
         guard let scrollView = scrollView else {
             return
         }
-        let navigationBarHeight: CGFloat = translucentNavigationBar ? 64 : 0
         let minimumHeight = min(self.minimumHeight, self.height)
-        let relativeYOffset = scrollView.contentOffset.y + scrollView.contentInset.top - height - navigationBarHeight
+        let relativeYOffset = scrollView.contentOffset.y + scrollView.contentInset.top - height - navigationBarOffset
         let relativeHeight = -relativeYOffset
 
         let frame = CGRect(
@@ -459,7 +458,7 @@ public class ParallaxHeader: NSObject {
         contentView.frame = frame
         
         let div = self.height - self.minimumHeight
-        progress = ((self.contentView.frame.size.height - navigationBarHeight) - self.minimumHeight) / div
+        progress = ((self.contentView.frame.size.height - navigationBarOffset) - self.minimumHeight) / div
     }
     
     private func adjustScrollViewTopInset(top: CGFloat) {
