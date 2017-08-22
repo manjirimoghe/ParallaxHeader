@@ -192,7 +192,7 @@ public class ParallaxHeader: NSObject {
         }
     }
 
-    public var navigationBarOffset: CGFont = 0.0 {
+    public var navigationBarOffset: CGFloat = 0.0 {
         didSet {
             layoutContentView()
         }
