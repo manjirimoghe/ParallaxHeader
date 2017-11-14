@@ -37,13 +37,14 @@ class ParallaxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.parallaxHeader.height = 400
         tableView.parallaxHeader.minimumHeight = 64
         tableView.parallaxHeader.mode = .topFill
-        tableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
-            print(parallaxHeader.progress)
-        }
     }
     
     
     //MARK: table view data source/delegate
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
@@ -54,6 +55,16 @@ class ParallaxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.text = "some row text"
         
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = UITableViewCell()
+
+        cell.backgroundColor = .black
+        cell.textLabel?.text = "a header text"
+        cell.textLabel?.textColor = .white
+
         return cell
     }
 }

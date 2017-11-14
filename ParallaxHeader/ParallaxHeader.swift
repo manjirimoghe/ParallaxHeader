@@ -459,6 +459,22 @@ public class ParallaxHeader: NSObject {
         
         let div = self.height - self.minimumHeight
         progress = ((self.contentView.frame.size.height - navigationBarOffset) - self.minimumHeight) / div
+
+        var contentInset: UIEdgeInsets {
+            if scrollView.contentOffset.y < 0 {
+                let top: CGFloat = min(abs(scrollView.contentOffset.y), height)
+                return UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
+            } else {
+                return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            }
+        }
+
+//        print("Setting content inset to \(inset) with offset: \(offset) and : \(scrollView.isDragging)")
+        print("Scroll view dragging: \(scrollView.isDragging) ")
+
+        if scrollView.contentInset != contentInset && scrollView.isDragging {
+            scrollView.contentInset = contentInset
+        }
     }
     
     private func adjustScrollViewTopInset(top: CGFloat) {
@@ -466,7 +482,7 @@ public class ParallaxHeader: NSObject {
             return
         }
         var inset = scrollView.contentInset
-        
+
         //Adjust content offset
         var offset = scrollView.contentOffset
         offset.y += inset.top - top
