@@ -472,7 +472,6 @@ public class ParallaxHeader: NSObject {
         guard
             let tableView = scrollView as? UITableView,
             tableView.style == .plain,
-            tableView.numberOfSections > 1,
             scrollView.isDragging,
             scrollView.contentInset != contentInset
             else { return }
