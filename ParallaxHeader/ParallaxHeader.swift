@@ -469,12 +469,15 @@ public class ParallaxHeader: NSObject {
             }
         }
 
-//        print("Setting content inset to \(inset) with offset: \(offset) and : \(scrollView.isDragging)")
-        print("Scroll view dragging: \(scrollView.isDragging) ")
+        guard
+            let tableView = scrollView as? UITableView,
+            tableView.style == .plain,
+            tableView.numberOfSections > 1,
+            scrollView.isDragging,
+            scrollView.contentInset != contentInset
+            else { return }
 
-        if scrollView.contentInset != contentInset && scrollView.isDragging {
-            scrollView.contentInset = contentInset
-        }
+        scrollView.contentInset = contentInset
     }
     
     private func adjustScrollViewTopInset(top: CGFloat) {
