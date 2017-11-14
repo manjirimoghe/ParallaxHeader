@@ -495,7 +495,6 @@ public class ParallaxHeader: NSObject {
         scrollView.contentInset = inset
     }
     
-    
     //MARK: KVO
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
