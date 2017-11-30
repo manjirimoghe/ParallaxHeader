@@ -170,6 +170,10 @@ public class ParallaxHeader: NSObject {
      */
     public var minimumHeight: CGFloat = 0 {
         didSet {
+            guard minimumHeight != oldValue else {
+                return
+            }
+
             layoutContentView()
         }
     }
@@ -194,6 +198,10 @@ public class ParallaxHeader: NSObject {
 
     public var navigationBarOffset: CGFloat = 0.0 {
         didSet {
+            guard navigationBarOffset != oldValue else {
+                return
+            }
+
             layoutContentView()
         }
     }
